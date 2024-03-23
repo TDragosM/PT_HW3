@@ -1,0 +1,1009 @@
+[1, 14:19:30] Apply changes to schoolddb: Applying object changes ...
+[1, 14:19:33] Applying changes to schoolddb...: 
+[1, 14:19:33] : Changes applied to schoolddb
+[1, 14:19:34] Apply changes to schoolddb: Changes applied
+[2, 14:21:35] Apply changes to student: Applying object changes ...
+[2, 14:21:38] Applying changes to student...: 
+[2, 14:21:38] : Changes applied to student
+[2, 14:21:39] Apply changes to student: Changes applied
+[1, 15:14:12] Apply changes to Client: Applying object changes ...
+[1, 15:14:19] Applying changes to client...: 
+[1, 15:14:19] : Changes applied to client
+[1, 15:14:20] Apply changes to Client: Changes applied
+[2, 15:17:23] Apply changes to Product: Applying object changes ...
+[2, 15:17:26] Applying changes to product...: 
+[2, 15:17:26] : Changes applied to product
+[2, 15:17:27] Apply changes to Product: Changes applied
+[3, 15:18:25] Apply changes to product: Applying object changes ...
+[3, 15:18:27] Applying changes to product...: 
+[3, 15:18:27] : Changes applied to product
+[3, 15:18:28] Apply changes to product: Changes applied
+[4, 15:20:51] Apply changes to Order: Applying object changes ...
+[4, 15:20:55] Applying changes to order...: 
+[4, 15:20:55] : Changes applied to order
+[4, 15:20:55] Apply changes to Order: Changes applied
+[3, 15:25:55] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[3, 15:25:55] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[4, 15:25:55] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[4, 15:25:55] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[5, 15:25:55] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[5, 15:25:55] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[6, 15:25:55] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[6, 15:25:55] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[7, 15:25:55] USE `schoolddb`: Running...
+[7, 15:25:55] USE `schoolddb`: 0 row(s) affected
+[8, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[8, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[9, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[9, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[10, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idClient_idx` (`clientId` ASC) VISIBLE,
+  INDEX `idProduct_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[10, 15:25:55] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idClient_idx` (`clientId` ASC) VISIBLE,
+  INDEX `idProduct_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[11, 15:25:55] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[11, 15:25:55] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[12, 15:25:55] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[12, 15:25:55] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[13, 15:25:55] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[13, 15:25:55] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[1, 15:27:51] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[1, 15:27:51] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[2, 15:27:51] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[2, 15:27:51] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[3, 15:27:51] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[3, 15:27:51] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[4, 15:27:51] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[4, 15:27:51] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[5, 15:27:51] USE `schoolddb`: Running...
+[5, 15:27:51] USE `schoolddb`: 0 row(s) affected
+[6, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[6, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[7, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[7, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[8, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idClient_idx` (`clientId` ASC) VISIBLE,
+  INDEX `idProduct_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[8, 15:27:51] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idClient_idx` (`clientId` ASC) VISIBLE,
+  INDEX `idProduct_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[9, 15:27:51] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[9, 15:27:51] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[10, 15:27:51] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[10, 15:27:51] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[11, 15:27:51] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[11, 15:27:51] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[12, 15:28:37] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[12, 15:28:37] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[13, 15:28:37] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[13, 15:28:37] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[14, 15:28:37] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[14, 15:28:37] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[15, 15:28:37] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[15, 15:28:37] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[16, 15:28:37] USE `schoolddb`: Running...
+[16, 15:28:37] USE `schoolddb`: 0 row(s) affected
+[17, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[17, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[18, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[18, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[19, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[19, 15:28:37] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[20, 15:28:37] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[20, 15:28:37] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[21, 15:28:37] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[21, 15:28:37] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[22, 15:28:37] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[22, 15:28:37] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[1, 15:28:46] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[1, 15:28:46] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[2, 15:28:46] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[2, 15:28:46] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[3, 15:28:46] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[3, 15:28:46] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[4, 15:28:46] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[4, 15:28:46] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[5, 15:28:46] USE `schoolddb`: Running...
+[5, 15:28:46] USE `schoolddb`: 0 row(s) affected
+[6, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[6, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[7, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[7, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[8, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[8, 15:28:46] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `clientId` INT NULL DEFAULT NULL,
+  `productId` INT NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `idClient`
+    FOREIGN KEY (`clientId`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idProduct`
+    FOREIGN KEY (`productId`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[9, 15:28:46] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[9, 15:28:46] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[10, 15:28:46] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[10, 15:28:46] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[11, 15:28:46] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[11, 15:28:46] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[12, 15:32:32] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[12, 15:32:32] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[13, 15:32:32] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[13, 15:32:32] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[14, 15:32:32] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[14, 15:32:32] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[15, 15:32:32] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[15, 15:32:32] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[16, 15:32:32] USE `schoolddb`: Running...
+[16, 15:32:32] USE `schoolddb`: 0 row(s) affected
+[17, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[17, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[18, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[18, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[19, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+  INDEX `fk_order_client_idx` (`idClient` ASC) VISIBLE,
+  INDEX `fk_order_product1_idx` (`idProduct` ASC) VISIBLE,
+  CONSTRAINT `fk_order_client`
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_product1`
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[19, 15:32:32] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+  INDEX `fk_order_client_idx` (`idClient` ASC) VISIBLE,
+  INDEX `fk_order_product1_idx` (`idProduct` ASC) VISIBLE,
+  CONSTRAINT `fk_order_client`
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_product1`
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[20, 15:32:32] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[20, 15:32:32] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[21, 15:32:32] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[21, 15:32:32] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[22, 15:32:32] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[22, 15:32:32] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[23, 15:34:09] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[23, 15:34:09] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[24, 15:34:09] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[24, 15:34:09] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[25, 15:34:09] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[25, 15:34:09] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[26, 15:34:09] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[26, 15:34:09] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[27, 15:34:09] USE `schoolddb`: Running...
+[27, 15:34:09] USE `schoolddb`: 0 row(s) affected
+[28, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[28, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[29, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[29, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[30, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[30, 15:34:09] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[31, 15:34:09] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[31, 15:34:09] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[32, 15:34:09] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[32, 15:34:09] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[33, 15:34:09] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[33, 15:34:09] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[34, 15:34:10] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[34, 15:34:10] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[35, 15:34:10] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[35, 15:34:10] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[36, 15:34:10] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[36, 15:34:10] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[37, 15:34:10] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[37, 15:34:10] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[38, 15:34:10] USE `schoolddb`: Running...
+[38, 15:34:10] USE `schoolddb`: 0 row(s) affected
+[39, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[39, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[40, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[40, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[41, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[41, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[42, 15:34:10] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[42, 15:34:10] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[43, 15:34:10] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[43, 15:34:10] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[44, 15:34:10] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[44, 15:34:10] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[45, 15:34:10] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[45, 15:34:10] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[46, 15:34:10] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[46, 15:34:10] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[47, 15:34:10] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[47, 15:34:10] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[48, 15:34:10] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[48, 15:34:10] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[49, 15:34:10] USE `schoolddb`: Running...
+[49, 15:34:10] USE `schoolddb`: 0 row(s) affected
+[50, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[50, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[51, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[51, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[52, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: Running...
+[52, 15:34:10] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`, `idClient`, `idProduct`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `schoolddb`.`client` (`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `schoolddb`.`product` (`idProduct`)
+   )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci: 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[53, 15:34:10] SET SQL_MODE=@OLD_SQL_MODE: Running...
+[53, 15:34:10] SET SQL_MODE=@OLD_SQL_MODE: 0 row(s) affected
+[54, 15:34:10] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: Running...
+[54, 15:34:10] SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS: 0 row(s) affected
+[55, 15:34:10] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: Running...
+[55, 15:34:10] SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS: 0 row(s) affected
+[56, 15:34:41] DROP TABLE `schoolddb`.`student`: Running...
+[56, 15:34:41] DROP TABLE `schoolddb`.`student`: 0 row(s) affected
+[57, 15:37:29] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: Running...
+[57, 15:37:29] SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0: 0 row(s) affected
+[58, 15:37:29] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: Running...
+[58, 15:37:29] SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0: 0 row(s) affected
+[59, 15:37:29] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': Running...
+[59, 15:37:29] SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION': 0 row(s) affected
+[60, 15:37:29] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: Running...
+[60, 15:37:29] CREATE SCHEMA IF NOT EXISTS `schoolddb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci: 1 row(s) affected, 1 warning(s):
+1007 Can't create database 'schoolddb'; database exists
+[61, 15:37:29] USE `schoolddb`: Running...
+[61, 15:37:29] USE `schoolddb`: 0 row(s) affected
+[62, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`)): Running...
+[62, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`client` (
+  `idClient` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `address` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idClient`)): 0 row(s) affected, 1 warning(s):
+1050 Table 'client' already exists
+[63, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`)): Running...
+[63, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`product` (
+  `idProduct` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`idProduct`)): 0 row(s) affected, 1 warning(s):
+1050 Table 'product' already exists
+[64, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `client`(`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `product`(`idProduct`)
+   ): Running...
+[64, 15:37:29] CREATE TABLE IF NOT EXISTS `schoolddb`.`order` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NULL DEFAULT NULL,
+  `idClient` INT NOT NULL,
+  `idProduct` INT NOT NULL,
+  PRIMARY KEY (`id`),
+
+    FOREIGN KEY (`idClient`)
+    REFERENCES `client`(`idClient`),
+
+    FOREIGN KEY (`idProduct`)
+    REFERENCES `product`(`idProduct`)
+   ): 0 row(s) affected, 1 warning(s):
+1050 Table 'order' already exists
+[65, 15:40:43] alter table `order`
+add constraint FK_ClientId
+foreign key(idClient) references `client`(idClient): Running...
+[65, 15:40:43] alter table `order`
+add constraint FK_ClientId
+foreign key(idClient) references `client`(idClient): Error Code: 1072. Key column 'idClient' doesn't exist in table
+[66, 15:41:37] alter table `order`
+add constraint FK_ClientId
+foreign key(ClientId) references `client`(idClient): Running...
+[66, 15:41:37] alter table `order`
+add constraint FK_ClientId
+foreign key(ClientId) references `client`(idClient): 0 row(s) affected
+Records: 0  Duplicates: 0  Warnings: 0
+[67, 15:42:12] alter table `order`
+add constraint FK_ProductId
+foreign key(ProductId) references `client`(idProduct): Running...
+[67, 15:42:12] alter table `order`
+add constraint FK_ProductId
+foreign key(ProductId) references `client`(idProduct): Error Code: 3734. Failed to add the foreign key constraint. Missing column 'idProduct' for constraint 'FK_ProductId' in the referenced table 'client'
+[68, 15:42:29] alter table `order`
+add constraint FK_ProductId
+foreign key(ProductId) references `product`(idProduct): Running...
+[68, 15:42:29] alter table `order`
+add constraint FK_ProductId
+foreign key(ProductId) references `product`(idProduct): 0 row(s) affected
+Records: 0  Duplicates: 0  Warnings: 0
+[69, 16:44:48] Apply changes to orders: Applying object changes ...
+[69, 16:44:51] Applying changes to orders...: 
+[69, 16:44:52] : Changes applied to orders
+[69, 16:44:52] Apply changes to orders: Changes applied
+[70, 16:44:59] Apply changes to clients: Applying object changes ...
+[70, 16:45:00] Applying changes to clients...: 
+[70, 16:45:00] : Changes applied to clients
+[70, 16:45:01] Apply changes to clients: Changes applied
+[71, 16:45:11] Apply changes to products: Applying object changes ...
+[71, 16:45:13] Applying changes to products...: 
+[71, 16:45:13] : Changes applied to products
+[71, 16:45:13] Apply changes to products: Changes applied
+[1, 18:43:02] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[1, 18:43:02] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[1, 18:43:02] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 1 row(s) returned
+[2, 18:50:18] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[2, 18:50:18] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[2, 18:50:18] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 1 row(s) returned
+[3, 18:50:58] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[3, 18:50:58] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[3, 18:50:58] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 1 row(s) returned
+[4, 18:51:19] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[4, 18:51:19] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[4, 18:51:19] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 0 row(s) returned
+[5, 19:44:09] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[5, 19:44:09] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[5, 19:44:09] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 1 row(s) returned
+[6, 19:44:34] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Running...
+[6, 19:44:34] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: Fetching...
+[6, 19:44:34] SELECT * FROM schoolddb.clients
+LIMIT 0, 1000
+: 1 row(s) returned
+[7, 19:46:02] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[7, 19:46:02] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[7, 19:46:02] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
+[8, 19:46:24] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[8, 19:46:24] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[8, 19:46:24] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
+[9, 19:50:24] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Running...
+[9, 19:50:24] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Fetching...
+[9, 19:50:24] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: 0 row(s) returned
+[10, 19:50:35] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[10, 19:50:35] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[10, 19:50:35] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
+[11, 19:55:53] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Running...
+[11, 19:55:53] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Fetching...
+[11, 19:55:53] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: 1 row(s) returned
+[12, 19:56:12] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[12, 19:56:12] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[12, 19:56:12] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
+[13, 19:56:47] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Running...
+[13, 19:56:47] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Fetching...
+[13, 19:56:47] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: 2 row(s) returned
+[14, 20:00:03] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Running...
+[14, 20:00:03] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Fetching...
+[14, 20:00:03] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: 1 row(s) returned
+[15, 20:00:09] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[15, 20:00:09] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[15, 20:00:09] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
+[16, 20:01:46] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Running...
+[16, 20:01:46] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: Fetching...
+[16, 20:01:46] SELECT * FROM schoolddb.orders
+LIMIT 0, 1000
+: 1 row(s) returned
+[17, 20:01:49] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Running...
+[17, 20:01:49] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: Fetching...
+[17, 20:01:49] SELECT * FROM schoolddb.products
+LIMIT 0, 1000
+: 1 row(s) returned
